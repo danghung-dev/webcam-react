@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
 }
 
 .App-logo {
