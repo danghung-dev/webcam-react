@@ -78,6 +78,7 @@ class App extends React.Component {
           screenshotFormat="image/jpeg"
           width={1280}
           videoConstraints={videoConstraints}
+          screenshotQuality={1}
         />
          </div>
         <p> {userName}</p>
