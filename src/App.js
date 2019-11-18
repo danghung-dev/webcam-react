@@ -49,13 +49,18 @@ class App extends React.Component {
     
   }
   capture = ()=>{
-    let imageSrc = this.webcamRef.current.getScreenshot();
-    const jpgPrefix = 'data:image/jpeg;base64,'
-    postImage({ image: imageSrc.replace(jpgPrefix, '')}).then((respone)=>{
-      this.setState({
-        userName:respone
+    try {
+      let imageSrc = this.webcamRef.current.getScreenshot();
+      const jpgPrefix = 'data:image/jpeg;base64,'
+      postImage({ image: imageSrc.replace(jpgPrefix, '')}).then((respone)=>{
+        this.setState({
+          userName:respone
+        })
       })
-    })
+    } catch (error) {
+      
+    }
+  
 
   }
      
