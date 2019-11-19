@@ -81,9 +81,13 @@ class App extends React.Component {
           screenshotQuality={1}
         />
          </div>
-        <p> {userName}</p>
-         <button style={{height: 50, width: 200, marginTop: 20, backgroundColor: '#f65335', color: 'white'}} onClick={this.pressButtonStatus}> {currentStatus === 1 ? 'Bật chế độ thủ công': 'Bật chế độ auto'}</button>
-         {currentStatus === 2 ? <button style={{height: 50, width: 200, marginTop: 20, backgroundColor: 'blue', color: 'white'}} onClick={this.capture}> Chup</button> : null}
+        <p style={{fontSize: 15, color: '#1303fc', fontWeight: 'bold'}}> {userName}</p>
+        {currentStatus === 2 ? <button style={{height: 50, width: 200, marginTop: 20, backgroundColor: '#0a802b', color: 'white', fontWeight: 'bold'}} onClick={this.capture}> CHỤP</button> : null}
+         <button 
+            style={{height: 50, width: 200, marginTop: 20, backgroundColor: '#f65335', color: 'white', fontWeight: 'bold'}} onClick={this.pressButtonStatus}> 
+            {currentStatus === 1 ? 'BẬT CHẾ ĐỘ THỦ CÔNG': 'BẬT CHẾ ĐỘ AUTO'}
+         </button>
+       
       </div>
     );
   }
