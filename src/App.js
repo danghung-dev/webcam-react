@@ -17,8 +17,10 @@ class App extends React.Component {
     this.state ={
       userName: 'No face',
       currentStatus: 1,
-      currentQuatity: 1,
+      currentQuality: 1,
+     
     }
+    this.deviceQuality= 1
   }
   componentDidMount (){
     this.intervalId = setInterval(this.capture, 1000);
@@ -52,16 +54,19 @@ class App extends React.Component {
   }
   capture = ()=>{
     try {
+      const {deviceQuality} = this.state
       let imageSrc = this.webcamRef.current.getScreenshot();
       const jpgPrefix = 'data:image/jpeg;base64,'
-    
-      const tRadio = MAX_QUALITY/imageSrc.length 
+      if(this.deviceQuality < imageSrc.length ){
+        this.deviceQuality= imageSrc.length
+      }
+      const tRadio = MAX_QUALITY/ this.deviceQuality
       const radio = tRadio > 1 ? 1: tRadio
 
       postImage({ image: imageSrc.replace(jpgPrefix, '')}).then((respone)=>{
         this.setState({
           userName:respone,
-          currentQuatity:radio,
+          currentQuality:radio,
         })
       })
     } catch (error) {
@@ -73,7 +78,7 @@ class App extends React.Component {
       
 
   render(){
-    const {userName,currentStatus,currentQuatity } = this.state
+    const {userName,currentStatus,currentQuality } = this.state
    
     return (
       <div className="App">
@@ -85,7 +90,7 @@ class App extends React.Component {
           screenshotFormat="image/jpeg"
           width={1280}
           videoConstraints={videoConstraints}
-          screenshotQuality={currentQuatity}
+          screenshotQuality={currentQuality}
         />
          </div>
         <p style={{fontSize: 40, color: '#1303fc', fontWeight: 'bold', marginBlockStart: '10px'}}> {userName}</p>
