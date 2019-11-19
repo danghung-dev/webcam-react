@@ -81,7 +81,7 @@ class App extends React.Component {
           screenshotQuality={1}
         />
          </div>
-        <p style={{fontSize: 15, color: '#1303fc', fontWeight: 'bold'}}> {userName}</p>
+        <p style={{fontSize: 40, color: '#1303fc', fontWeight: 'bold', marginBlockStart: '10px'}}> {userName}</p>
         {currentStatus === 2 ? <button style={{height: 50, width: 200, marginTop: 20, backgroundColor: '#0a802b', color: 'white', fontWeight: 'bold'}} onClick={this.capture}> CHỤP</button> : null}
          <button 
             style={{height: 50, width: 200, marginTop: 20, backgroundColor: '#f65335', color: 'white', fontWeight: 'bold'}} onClick={this.pressButtonStatus}> 
