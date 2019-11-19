@@ -8,6 +8,7 @@ const videoConstraints = {
   facingMode: "user"
 };
 
+const MAX_QUALITY = 150255
 
 class App extends React.Component {
   constructor(props){
@@ -15,7 +16,8 @@ class App extends React.Component {
     this.webcamRef = React.createRef()
     this.state ={
       userName: 'No face',
-      currentStatus: 1
+      currentStatus: 1,
+      currentQuatity: 1,
     }
   }
   componentDidMount (){
@@ -52,9 +54,14 @@ class App extends React.Component {
     try {
       let imageSrc = this.webcamRef.current.getScreenshot();
       const jpgPrefix = 'data:image/jpeg;base64,'
+    
+      const tRadio = MAX_QUALITY/imageSrc.length 
+      const radio = tRadio > 1 ? 1: tRadio
+
       postImage({ image: imageSrc.replace(jpgPrefix, '')}).then((respone)=>{
         this.setState({
-          userName:respone
+          userName:respone,
+          currentQuatity:radio,
         })
       })
     } catch (error) {
@@ -63,10 +70,10 @@ class App extends React.Component {
   
 
   }
-     
+      
 
   render(){
-    const {userName,currentStatus} = this.state
+    const {userName,currentStatus,currentQuatity } = this.state
    
     return (
       <div className="App">
@@ -78,7 +85,7 @@ class App extends React.Component {
           screenshotFormat="image/jpeg"
           width={1280}
           videoConstraints={videoConstraints}
-          screenshotQuality={1}
+          screenshotQuality={currentQuatity}
         />
          </div>
         <p style={{fontSize: 40, color: '#1303fc', fontWeight: 'bold', marginBlockStart: '10px'}}> {userName}</p>
