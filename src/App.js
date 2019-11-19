@@ -54,7 +54,7 @@ class App extends React.Component {
   }
   capture = ()=>{
     try {
-      const {deviceQuality} = this.state
+     
       let imageSrc = this.webcamRef.current.getScreenshot();
       const jpgPrefix = 'data:image/jpeg;base64,'
       if(this.deviceQuality < imageSrc.length ){
