@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL =  'http://192.168.10.246:5000'
+const URL =  ''
 const doRequest = async (url, options) => {
     const log = {
       request: {
