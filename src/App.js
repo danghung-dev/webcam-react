@@ -2,6 +2,7 @@ import React from 'react';
 import Webcam from "react-webcam";
 import './App.css';
 import {postImage} from './api'
+import smartcrop from 'smartcrop'
 const videoConstraints = {
   width: '100%',
   height: '50%',
@@ -63,6 +64,20 @@ class App extends React.Component {
       const tRadio = MAX_QUALITY/ this.deviceQuality
       const radio = tRadio > 1 ? 1: tRadio
 
+      var testimg = document.createElement('img');
+      testimg.src = imageSrc
+      document.body.appendChild(testimg);
+      testimg.onload = function() {
+        smartcrop.crop(testimg, {
+          x: 11, // pixels from the left side
+          y: 20, // pixels from the top
+          width: 100, // pixels
+          height: 100 // pixels
+        }).then(function(result) {
+          console.log(result);
+        });
+      };
+      
       postImage({ image: imageSrc.replace(jpgPrefix, '')}).then((respone)=>{
         this.setState({
           userName:respone,
@@ -79,7 +94,7 @@ class App extends React.Component {
 
   render(){
     const {userName,currentStatus,currentQuality } = this.state
-   
+    
     return (
       <div className="App">
         <div>
